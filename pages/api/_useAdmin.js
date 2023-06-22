@@ -2,14 +2,12 @@ import { useEffect } from "react";
 import Router from "next/router";
 import useSWR from "swr";
 
-// Fetcher function that wraps fetch
 const fetcher = (...args) => fetch(...args).then(res => res.json())
 
 export default function useAdmin({
     redirectTo = "",
     redirectIfFound = false,
 }) {
-    // Get admin auth
     const { data: auth } = useSWR("/api/admin", fetcher);
 
     useEffect(() => {

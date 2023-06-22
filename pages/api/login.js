@@ -2,10 +2,6 @@ import { withIronSessionApiRoute } from "iron-session/next";
 import { sessionOptions } from "./_session";
 
 async function loginRoute (req, res) {
-    req.body = JSON.parse(req.body);
-
-    console.log(req.body)
-    
     // Check token
     if (req.body.token !== process.env.ADMIN_TOKEN) {
         return res.status(401).send({ ok: false });

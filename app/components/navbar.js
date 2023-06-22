@@ -24,7 +24,7 @@ export default function Navbar() {
             <div className="max-w-7xl mx-auto  flex justify-between items-center ">
                 <div className="flex items-center">
                     <Link className="text-white text-lg font-bold" href="/">
-                        extremq's drawings
+                        extremq&apos;s drawings
                     </Link>
                 </div>
                 <div className="flex items-center">

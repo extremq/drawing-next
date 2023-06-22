@@ -47,7 +47,7 @@ export default function LoginForm() {
             <p className="text-lg mb-3">
                 Hey, you found the secret login page!
                 <br /> <br />
-                Don't tell anyone.
+                Don&apos;t tell anyone.
             </p>
             <form className="w-full max-w-sm" onSubmit={handleSubmit}>
                 <div className="mb-4">

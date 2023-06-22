@@ -16,7 +16,7 @@ export default function About() {
 
             <main>
                 <h1 className="text-4xl font-bold text-center">
-                    You're an admin!
+                    Youre an admin!
                 </h1>
 
                 <Link href="/">

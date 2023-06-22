@@ -41,7 +41,7 @@ export default function Navbar() {
                     </Link>
                     {auth?.admin && (
                     <button
-                        className="text-white hover:bg-gray-700 px-3 py-2 rounded-md text-sm font-medium"
+                        className="text-white hover:bg-red-700 px-3 py-2 rounded-md text-sm font-medium"
                         onClick={handleLogout}
                     >
                         Logout

@@ -2,8 +2,6 @@ import 'app/globals.css'
 import Head from 'next/head'
 import Navbar from '@/app/components/navbar';
 
-export const siteTitle = 'My drawing journey | desenez.eu';
-
 export default function RootLayout({ children, title }) {
     return (
         <div>
@@ -17,7 +15,7 @@ export default function RootLayout({ children, title }) {
                     property="og:image"
                     content=
                 /> */}
-                <meta name="og:title" content={siteTitle} />
+                <meta name="og:title" content={`${title} | desenez.eu`} />
                 <meta name="twitter:card" content="summary_large_image" />
                 <title>{title}</title>
             </Head>

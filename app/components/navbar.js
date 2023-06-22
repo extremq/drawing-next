@@ -1,4 +1,4 @@
-import useAdmin from '@/pages/api/_useAdmin';
+import useAdmin from '@/lib/useAdmin';
 import Link from 'next/link';
 import { mutate } from 'swr';
 import Router from 'next/router';

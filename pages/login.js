@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Layout from './layout'
 import { mutate } from 'swr';
-import useAdmin from './api/_useAdmin';
+import useAdmin from '@/lib/useAdmin';
 
 export default function LoginForm() {
     const [token, setToken] = useState('');

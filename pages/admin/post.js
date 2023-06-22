@@ -1,5 +1,5 @@
 import Layout from '../layout'
-import useAdmin from '../api/_useAdmin'
+import useAdmin from '@/lib/useAdmin'
 
 export default function About() {
     useAdmin({

@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import Link from 'next/link'
 import Layout from 'app/layout'
-import useAdmin from '@/lib/useAdmin'
+import useAdmin from '../api/_useAdmin'
 
 export default function About() {
     useAdmin({

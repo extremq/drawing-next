@@ -1,5 +1,5 @@
 import { withIronSessionApiRoute } from "iron-session/next";
-import { sessionOptions } from "@/lib/session";
+import { sessionOptions } from "./_session";
 
 async function loginRoute (req, res) {
     req.body = JSON.parse(req.body);

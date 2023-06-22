@@ -7,9 +7,9 @@ async function loginRoute (req, res) {
         return res.status(401).send({ ok: false });
     }
 
-    // Set admin auth for session
+    // Set token for session
     req.session.auth = {
-        admin: true,
+        token: req.body.token,
     };
 
     await req.session.save();

@@ -3,12 +3,25 @@ import useAdmin from '@/lib/useAdmin'
 import Router from 'next/router'
 
 export default function About() {
-    useAdmin({
+    const admin = useAdmin({
         redirectTo: '/login',
     })
 
+    // Check auth
+    if (!(admin.auth && admin.auth?.admin)) {
+        return (
+            <Layout title="Loading...">
+                <p className="text-lg mb-3">
+                    Checking authorization...
+                </p>
+            </Layout>
+        )
+    }
+    
     return (
-        <Layout title={"Admin Dashboard"}>
+        <Layout title={
+            "Admin Dashboard"
+        }>
             <p className="text-lg mb-3">
                 Hello, I hope your name is Extremq.
             </p>

@@ -29,19 +29,19 @@ export default function Navbar() {
                 </div>
                 <div className="flex items-center">
                     {auth?.admin && (
-                    <Link className="text-white hover:bg-gray-700 px-3 py-2 rounded-md text-sm font-medium" href="/admin">
+                    <Link className="text-white hover:bg-peri hover:text-black px-3 py-2 rounded-md text-sm font-medium" href="/admin">
                         Admin Dashboard
                     </Link>
                     )}
-                    <Link className="text-white hover:bg-gray-700 px-3 py-2 rounded-md text-sm font-medium" href="/">
+                    <Link className="text-white hover:bg-peri hover:text-black px-3 py-2 rounded-md text-sm font-medium" href="/">
                         Home
                     </Link>
-                    <Link className="text-white hover:bg-gray-700 px-3 py-2 rounded-md text-sm font-medium" href="/about">
+                    <Link className="text-white hover:bg-peri hover:text-black px-3 py-2 rounded-md text-sm font-medium" href="/about">
                         About
                     </Link>
                     {auth?.admin && (
                     <button
-                        className="text-white hover:bg-red-700 px-3 py-2 rounded-md text-sm font-medium"
+                        className="text-white hover:bg-red-500 hover:text-black px-3 py-2 rounded-md text-sm font-medium"
                         onClick={handleLogout}
                     >
                         Logout

@@ -10,7 +10,7 @@ export default function About() {
                 <br />
                 I thought it would be interesting to post my drawings online and see how I progress.
                 <br /> <br />
-                I also have a <a className="text-blue-500 hover:text-blue-700 hover:underline font-semibold" href="https://suntdoar.eu">blog</a> where I post interesting stuff about anything.
+                I also have a <a className="text-peri hover:text-peri-dark hover:underline font-semibold" target="_blank" href="https://suntdoar.eu">blog</a> where I post interesting stuff about anything.
                 <br /> <br />
                 If I inspire you to start drawing, then I&apos;m happy.
             </p1>

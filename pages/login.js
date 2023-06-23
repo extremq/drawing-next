@@ -10,6 +10,11 @@ export default function LoginForm() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        if (!token) {
+            setError('Please enter your token');
+            return;
+        }
+
         try {
             const response = await fetch('/api/login', {
                 method: 'POST',
@@ -57,7 +62,7 @@ export default function LoginForm() {
                     <input
                         type="password"
                         id="token"
-                        className={`w-full px-3 py-2 text-black focus:ring focus:ring-blue-500 border rounded-md focus:outline-none ${error ? 'border-red-500' : 'border-gray-300'
+                        className={`w-full px-3 py-2 text-black border-2 rounded-md ${error ? 'border-red-500' : 'border-gray-300'
                             }`}
                         placeholder="Enter your token"
                         value={token}
@@ -68,7 +73,7 @@ export default function LoginForm() {
                 <div className="flex items-center justify-between">
                     <button
                         type="submit"
-                        className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring focus:ring-blue-500"
+                        className="bg-peri hover:bg-peri-dark text-black font-bold py-2 px-4 rounded"
                     >
                         Log In
                     </button>

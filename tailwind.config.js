@@ -5,5 +5,20 @@ module.exports = {
         './components/**/*.{js,ts,jsx,tsx,mdx}',
         './app/**/*.{js,ts,jsx,tsx,mdx}',
     ],
-    plugins: []
+    plugins: [],
+    theme: {
+        extend: {
+            colors: {
+                peri: {
+                    light: "#E0E1FF",
+                    DEFAULT: "#B9BBEC",
+                    dark: "#6D6FA1",
+                },
+                mustard: {
+                    DEFAULT: "#EDE3B9",
+                    dark: "#A1945D",
+                }
+            }
+        }
+    }
 }

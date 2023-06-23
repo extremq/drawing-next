@@ -26,7 +26,7 @@ export default function About() {
                 Hello, I hope your name is Extremq.
             </p>
             <button
-                className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring focus:ring-blue-500"
+                className="text-black bg-peri hover:bg-peri-dark font-bold py-2 px-4 rounded"
                 onClick={() => {
                     Router.push('/admin/post');
                 }}

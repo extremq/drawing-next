@@ -6,14 +6,10 @@ import ReCAPTCHA from "react-google-recaptcha";
 export default function LoginForm() {
     const [token, setToken] = useState('');
     const [error, setError] = useState('');
+    const [loading, setLoading] = useState(false);
     const recaptchaRef = useRef(null);
 
     const onReCAPTCHAChange = async (captchaCode) => {
-        if (!token) {
-            setError('Please enter your token');
-            return;
-        }
-
         // If the reCAPTCHA code is null or undefined indicating that
         // the reCAPTCHA was expired then return early
         if (!captchaCode) {
@@ -21,10 +17,16 @@ export default function LoginForm() {
         }
 
         try {
+            setLoading(true);
+            // Generate csrf token
+            const { csrfToken } = await fetch('/api/csrf').then((res) => res.json());
+
+            // Send the reCAPTCHA and token response to the backend API
             const response = await fetch('/api/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
+                    'CSRF-Token': csrfToken,
                 },
                 body: JSON.stringify({ token, captcha: captchaCode }),
             });
@@ -46,12 +48,21 @@ export default function LoginForm() {
             setError(error.message || 'An error occurred. Please try again.');
         } finally {
             setToken('');
+            setLoading(false);
         }
     }
 
-
     const handleSubmit = (e) => {
         e.preventDefault();
+        
+        // Validate the token
+        if (!token) {
+            setError('Please enter your token');
+            return;
+        }
+        else {
+            setError('');
+        }
 
         // Reset then execute the reCAPTCHA when the form is submitted
         recaptchaRef.current.reset();
@@ -89,6 +100,7 @@ export default function LoginForm() {
                         placeholder="Enter your token"
                         value={token}
                         onChange={(e) => setToken(e.target.value)}
+                        disabled={loading}
                     />
                     {error && <p className="text-red-500 mb-4">{error}</p>}
                 </div>
@@ -96,6 +108,7 @@ export default function LoginForm() {
                     <button
                         type="submit"
                         className="bg-peri hover:bg-peri-dark text-black font-bold py-2 px-4 rounded"
+                        disabled={loading}
                     >
                         Log In
                     </button>

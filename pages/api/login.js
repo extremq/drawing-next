@@ -1,9 +1,24 @@
 import { withIronSessionApiRoute } from "iron-session/next";
 import { sessionOptions } from "@/lib/session";
 import createAdminRecord from "@/lib/createAdminRecord";
+import Tokens from 'csrf';
+
+const tokens = new Tokens();
 
 async function loginRoute(req, res) {
     const { token, captcha } = req.body;
+
+    // Get csrf token
+    const secret = req.session.csrfSecret;
+    const csrfToken = req.headers["csrf-token"];
+
+    // Validate csrf token
+    if (!secret || !tokens.verify(secret, csrfToken)) {
+        // Create admin record
+        await createAdminRecord(req, "Unsuccessful login.");
+
+        return res.status(401).send({ ok: false, message: "Invalid csrf token." });
+    }
 
     if (req.method !== "POST") {
         // Create admin record

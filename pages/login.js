@@ -1,17 +1,22 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import Layout from './layout'
 import { mutate } from 'swr';
 import useAdmin from '@/lib/useAdmin';
-
+import ReCAPTCHA from "react-google-recaptcha";
 export default function LoginForm() {
     const [token, setToken] = useState('');
     const [error, setError] = useState('');
+    const recaptchaRef = useRef(null);
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-
+    const onReCAPTCHAChange = async (captchaCode) => {
         if (!token) {
             setError('Please enter your token');
+            return;
+        }
+
+        // If the reCAPTCHA code is null or undefined indicating that
+        // the reCAPTCHA was expired then return early
+        if (!captchaCode) {
             return;
         }
 
@@ -21,7 +26,7 @@ export default function LoginForm() {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ token }),
+                body: JSON.stringify({ token, captcha: captchaCode }),
             });
 
             if (response.ok) {
@@ -34,12 +39,23 @@ export default function LoginForm() {
             } else {
                 // Login failed
                 const data = await response.json();
-                setError(data.message || 'Login failed');
+                throw new Error(data.message);
             }
         } catch (error) {
-            console.error('An unexpected error happened occurred:', error);
-            setError('An error occurred. Please try again.');
+            console.error('An unexpected error happened occurred:', error.message);
+            setError(error.message || 'An error occurred. Please try again.');
+        } finally {
+            setToken('');
         }
+    }
+
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        // Reset then execute the reCAPTCHA when the form is submitted
+        recaptchaRef.current.reset();
+        recaptchaRef.current.execute();
     };
 
     useAdmin({
@@ -55,6 +71,12 @@ export default function LoginForm() {
                 Don&apos;t tell anyone.
             </p>
             <form className="w-full max-w-sm" onSubmit={handleSubmit}>
+                <ReCAPTCHA
+                    ref={recaptchaRef}
+                    sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
+                    size="invisible"
+                    onChange={onReCAPTCHAChange}
+                />
                 <div className="mb-4">
                     <label htmlFor="token" className="block text-white text-sm font-bold mb-2">
                         Token

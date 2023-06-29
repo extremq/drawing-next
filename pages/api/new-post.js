@@ -1,6 +1,7 @@
 import { withIronSessionApiRoute } from "iron-session/next";
 import { sessionOptions } from "@/lib/session";
 import Post from "@/lib/models/Post";
+import dbConnect from "@/lib/db";
 
 async function newPostRoute (req, res) {
     // Check admin auth
@@ -13,6 +14,23 @@ async function newPostRoute (req, res) {
 
     const body = req.body;
     const { title, caption, tags, timestamp, images } = body;
+
+    console.log({title, caption, tags, timestamp});
+
+    // Connect to database
+    await dbConnect();
+
+    // Create post
+    const post = new Post({
+        title: title,
+        caption: caption,
+        tags: tags,
+        timestamp: timestamp,
+        images: images,
+    });
+
+    // Save post
+    await post.save();
 
     return res.status(200).send({ ok: true });
 };

@@ -11,7 +11,9 @@ export default function TagSelector({ setSelectedTags, selectedTags }) {
     useEffect(() => {
         const fetchTags = async () => {
             try {
-                const res = await fetch("/api/tags");
+                const res = await fetch("/api/tags",{
+                        method: "GET",
+                    });
                 if (!res.ok) {
                     throw new Error("Couldn't fetch tag suggestions.");
                 } else {
@@ -58,7 +60,7 @@ export default function TagSelector({ setSelectedTags, selectedTags }) {
         } else {
             setError(null)
         }
-        
+
         setSelectedTags(uniqueTags)
     }
 
@@ -84,6 +86,7 @@ export default function TagSelector({ setSelectedTags, selectedTags }) {
                         className="bg-peri hover:bg-peri-dark text-black font-bold py-2 px-4 rounded-md"
                         onClick={(e) => {
                             e.preventDefault()
+                            
                             if (currentTag.length > 0) {
                                 removeDuplicatesAndSetSelectedTags([...selectedTags, currentTag])
                                 setCurrentTag("")

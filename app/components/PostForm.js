@@ -153,6 +153,7 @@ export default function PostForm() {
                     <input
                         type="submit"
                         value={submitting ? "Submitting..." : "Submit"}
+                        disabled={submitting}
                         className="w-full cursor-pointer bg-peri hover:bg-peri-dark disabled:bg-peri-darker text-black font-bold py-2 px-4 rounded"
                     />
                 </div>

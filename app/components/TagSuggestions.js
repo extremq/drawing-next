@@ -47,7 +47,8 @@ export default function TagSuggestions({ tags, selectedTags, currentTag, setCurr
                                     <button
                                         key={tag.name}
                                         className="bg-white text-black py-2 px-2 rounded-md mr-1 mb-1 hover:cursor-pointer hover:bg-blue-100"
-                                        onClick={() => {
+                                        onClick={(e) => {
+                                            e.preventDefault()
                                             setSelectedTags([...selectedTags, tag.name])
                                             setCurrentTag("")
                                         }}

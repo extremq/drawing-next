@@ -1,6 +1,6 @@
 import 'app/globals.css'
 import Head from 'next/head'
-import Navbar from '@/app/components/navbar';
+import Navbar from '@/app/components/Navbar';
 
 export default function RootLayout({ children, title }) {
     return (
@@ -19,7 +19,7 @@ export default function RootLayout({ children, title }) {
                 <meta name="twitter:card" content="summary_large_image" />
                 <title>{title}</title>
             </Head>
-            <div className="container mx-auto max-w-sm lg:max-w-4xl">
+            <div className="container mx-auto max-w-4xl">
                 <Navbar />
                 <h1 className="text-4xl font-bold mb-3">
                     {title}

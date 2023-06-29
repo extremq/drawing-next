@@ -1,5 +1,6 @@
 import Layout from '../layout'
 import useAdmin from '@/lib/useAdmin'
+import PostForm from '@/app/components/PostForm'
 
 export default function About() {
     const admin = useAdmin({
@@ -19,6 +20,7 @@ export default function About() {
 
     return (
         <Layout title={"Create Post"}>
+            <PostForm />
         </Layout>
     )
 }

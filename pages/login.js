@@ -6,7 +6,7 @@ import ReCAPTCHA from "react-google-recaptcha";
 export default function LoginForm() {
     const [token, setToken] = useState('');
     const [error, setError] = useState('');
-    const [loading, setLoading] = useState(false);
+    const [logging, setLogging] = useState(false);
     const recaptchaRef = useRef(null);
 
     const onReCAPTCHAChange = async (captchaCode) => {
@@ -17,7 +17,7 @@ export default function LoginForm() {
         }
 
         try {
-            setLoading(true);
+            setLogging(true);
             // Generate csrf token
             const { csrfToken } = await fetch('/api/csrf').then((res) => res.json());
 
@@ -48,7 +48,7 @@ export default function LoginForm() {
             setError(error.message || 'An error occurred. Please try again.');
         } finally {
             setToken('');
-            setLoading(false);
+            setLogging(false);
         }
     }
 
@@ -100,17 +100,17 @@ export default function LoginForm() {
                         placeholder="Enter your token"
                         value={token}
                         onChange={(e) => setToken(e.target.value)}
-                        disabled={loading}
+                        disabled={logging}
                     />
                     {error && <p className="text-red-500 mb-4">{error}</p>}
                 </div>
-                <div className="flex items-center justify-between">
+                <div className="mb-4">
                     <button
                         type="submit"
-                        className="bg-peri hover:bg-peri-dark text-black font-bold py-2 px-4 rounded"
-                        disabled={loading}
+                        className="bg-peri hover:bg-peri-dark disabled:bg-peri-darker text-black font-bold py-2 px-4 rounded"
+                        disabled={logging}
                     >
-                        Log In
+                        { logging ? 'Logging in...' : 'Login'}
                     </button>
                 </div>
             </form>

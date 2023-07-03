@@ -2,6 +2,7 @@ import { withIronSessionApiRoute } from "iron-session/next";
 import { sessionOptions } from "@/lib/session";
 import Post from "@/lib/models/Post";
 import dbConnect from "@/lib/db";
+import Tag from "@/lib/models/Tag";
 
 async function newPostRoute (req, res) {
     // Check admin auth
@@ -13,12 +14,38 @@ async function newPostRoute (req, res) {
         return res.status(405).send({ ok: false, message: "Method not allowed." });
 
     const body = req.body;
-    const { title, caption, tags, timestamp, images } = body;
+    let { title, caption, tags, timestamp, images } = body;
+
+    // Set default values to undefined
+    if (!title) title = undefined;
+    if (!caption) caption = undefined;
+    if (!tags) tags = undefined;
+    if (!timestamp) timestamp = undefined;
+    if (!images) images = undefined;
 
     console.log({title, caption, tags, timestamp});
 
     // Connect to database
     await dbConnect();
+
+    for (const tag of tags) {
+        // Enforce az-09
+        const regex = /^[a-z0-9-]+$/;
+        if (!regex.test(tag)) {
+            return res.status(400).send({ ok: false, message: "Tags can only contain lowercase letters, numbers and dashes." });
+        }
+
+        const tagExists = await Tag.exists({ name: tag });
+        if (!tagExists) {
+            const newTag = new Tag({
+                name: tag,
+                count: 1,
+            });
+            await newTag.save();
+        } else {
+            await Tag.findOneAndUpdate({ name: tag }, { $inc: { count: 1 } });
+        }
+    }
 
     // Create post
     const post = new Post({
@@ -32,7 +59,8 @@ async function newPostRoute (req, res) {
     // Save post
     await post.save();
 
-    return res.status(200).send({ ok: true });
+    // Return id
+    return res.status(200).send({ ok: true, id: post._id });
 };
 
 export default withIronSessionApiRoute(

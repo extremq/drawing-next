@@ -19,19 +19,7 @@ async function tagsRoute (req, res) {
     const tags = await Tag.find({});
 
     // Return tags
-    // TODO: Return tags
-    res.json({
-        tags: [
-            {
-                "name": "sample-tag-1",
-                "count": 1,
-            },
-            {
-                "name": "sample-tag-2",
-                "count": 2,
-            },
-        ],
-    });
+    return res.status(200).send({ ok: true, tags: tags });
 };
 
 export default withIronSessionApiRoute(

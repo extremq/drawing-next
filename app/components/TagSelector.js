@@ -74,7 +74,7 @@ export default function TagSelector({ setSelectedTags, selectedTags }) {
             <div className="mb-4">
                 <div className="flex">
                     <input
-                        className={`flex-grow px-3 py-2 mr-1 text-black border-2 rounded-md ${error ? "border-red-500" : ""}`}
+                        className="flex-grow px-3 py-2 mr-1 text-white bg-black border focus:bg-white focus:text-black placeholder:text-gray-400 placeholder:italic"
                         type="text"
                         name="tag"
                         id="tag"
@@ -83,7 +83,7 @@ export default function TagSelector({ setSelectedTags, selectedTags }) {
                         onChange={(e) => setAndCleanCurrentTag(e.target.value)}
                     />
                     <button
-                        className="bg-peri hover:bg-peri-dark text-black font-bold py-2 px-4 rounded-md"
+                        className="border-white text-white  hover:bg-white hover:text-black border font-bold py-2 px-4"
                         onClick={(e) => {
                             e.preventDefault()
                             

@@ -95,7 +95,7 @@ export default function LoginForm() {
                     <input
                         type="password"
                         id="token"
-                        className={`w-full px-3 py-2 text-black border-2 rounded-md ${error ? 'border-red-500' : 'border-gray-300'
+                        className={`w-full px-3 py-2 bg-black text-white border focus:text-black focus:bg-white placeholder:italic ${error ? 'border-red-500' : 'border-gray-300'
                             }`}
                         placeholder="Enter your token"
                         value={token}
@@ -107,7 +107,7 @@ export default function LoginForm() {
                 <div className="mb-4">
                     <button
                         type="submit"
-                        className="bg-peri hover:bg-peri-dark disabled:bg-peri-darker text-black font-bold py-2 px-4 rounded"
+                        className="bg-black text-white border hover:text-black hover:bg-white disabled:cursor font-bold py-2 px-4"
                         disabled={logging}
                     >
                         { logging ? 'Logging in...' : 'Login'}

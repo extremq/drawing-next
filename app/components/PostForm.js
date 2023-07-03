@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import TagSelector from './TagSelector'
 import ImageSelector from './ImageSelector'
+import Router from "next/router";
 
 export default function PostForm() {
     // Post has:
@@ -62,7 +63,9 @@ export default function PostForm() {
             } else {
                 const data = await res.json()
                 setError(null)
-                console.log(data)
+
+                // Redirect to post
+                Router.push(`/p/${data.id}`)
             }
         }
         catch (error) {
@@ -86,67 +89,69 @@ export default function PostForm() {
     return (
         <div>
             <form className="w-full mb-4" onSubmit={handleSubmit}>
-                <div className="mb-4">
-                    <label
-                        htmlFor="title"
-                        className="block text-white text-sm font-bold mb-2"
-                    >
-                        Title:
-                    </label>
-                    <input
-                        className="w-full px-3 py-2 text-black border-2 rounded-md"
-                        type="text"
-                        name="title"
-                        id="title"
-                        placeholder="Incredible title here..."
-                        onChange={(e) => setTitle(e.target.value)}
-                    />
-                </div>
+                <div className="border px-4 pb-2 pt-4 mb-4">
+                    <div className="mb-4">
+                        <label
+                            htmlFor="title"
+                            className="block text-white text-sm font-bold mb-2"
+                        >
+                            Title:
+                        </label>
+                        <input
+                            className="w-full px-3 py-2 mr-1 text-white bg-black border focus:bg-white focus:text-black placeholder:text-gray-400 placeholder:italic"
+                            type="text"
+                            name="title"
+                            id="title"
+                            placeholder="No title"
+                            onChange={(e) => setTitle(e.target.value)}
+                        />
+                    </div>
 
-                <div className="mb-4">
-                    <label
-                        className="block text-white text-sm font-bold mb-2"
-                    >
-                        Caption:
-                    </label>
-                    <textarea
-                        className="w-full px-3 py-2 text-black border-2 rounded-md"
-                        name="caption"
-                        rows={3}
-                        placeholder="Your caption here..."
-                        onChange={(e) => setCaption(e.target.value)}
-                    />
-                </div>
+                    <div className="mb-4">
+                        <label
+                            className="block text-white text-sm font-bold mb-2"
+                        >
+                            Caption:
+                        </label>
+                        <textarea
+                            className="w-full px-3 py-2 mr-1 text-white bg-black border focus:bg-white focus:text-black placeholder:text-gray-400 placeholder:italic"
+                            name="caption"
+                            rows={3}
+                            placeholder="No caption"
+                            onChange={(e) => setCaption(e.target.value)}
+                        />
+                    </div>
 
-                <div className="mb-4">
-                    <TagSelector
-                        name="tags"
-                        setSelectedTags={setSelectedTags}
-                        selectedTags={selectedTags}
-                    />
-                </div>
+                    <div className="mb-4">
+                        <TagSelector
+                            name="tags"
+                            setSelectedTags={setSelectedTags}
+                            selectedTags={selectedTags}
+                        />
+                    </div>
 
-                <div className="mb-4">
-                    <label
-                        className="block text-white text-sm font-bold mb-2"
-                    >
-                        Date:
-                    </label>
-                    <input
-                        className="w-full px-3 py-2 border-2 text-gray-400 rounded-md"
-                        type="date"
-                        name="date"
-                        id="date"
-                        value={date}
-                        onChange={(e) => setDate(e.target.value)}
-                    />
-                </div>
+                    <div className="mb-4">
+                        <label
+                            className="block text-white text-sm font-bold mb-2"
+                        >
+                            Date (empty for today):
+                        </label>
+                        <input
+                            className="w-full px-3 py-2 mr-1 text-white bg-black border focus:bg-white focus:text-black placeholder:text-white placeholder:italic"
+                            type="date"
+                            name="date"
+                            id="date"
+                            value={date}
+                            onChange={(e) => setDate(e.target.value)}
+                        />
+                    </div>
 
-                <div className="mb-2">
-                    <ImageSelector
-                        images={images}
-                        setImages={setImages}
-                    />
+                    <div className="mb-2">
+                        <ImageSelector
+                            images={images}
+                            setImages={setImages}
+                        />
+                    </div>
                 </div>
 
                 <div>
@@ -154,7 +159,7 @@ export default function PostForm() {
                         type="submit"
                         value={submitting ? "Submitting..." : "Submit"}
                         disabled={submitting}
-                        className="w-full cursor-pointer bg-peri hover:bg-peri-dark disabled:bg-peri-darker text-black font-bold py-2 px-4 rounded"
+                        className="w-full cursor-pointer bg-black border text-white  hover:bg-white hover:text-black disabled:cursor-not-allowed font-bold py-2 px-4"
                     />
                 </div>
 

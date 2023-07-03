@@ -33,34 +33,35 @@ export default function TagSuggestions({ tags, selectedTags, currentTag, setCurr
     }, [currentTag, selectedTags, tags])
 
     return (
-        <div>
-            {
-                matchingTags.length > 0 &&
-                <>
-                    <p className="text-white text-sm font-bold mb-2">
-                        Tag suggestions:
-                    </p>
+        <div className="mb-2">
+                <p className="text-white text-sm font-bold mb-2">
+                    Tag suggestions:
+                </p>
+                {
+                    matchingTags.length > 0 ?
                     <div className="flex flex-wrap">
                         {
                             matchingTags.map((tag) => {
                                 return (
                                     <button
                                         key={tag.name}
-                                        className="bg-white text-black py-2 px-2 rounded-md mr-1 mb-1 hover:cursor-pointer hover:bg-blue-100"
+                                        className="text-white border py-2 px-2 hover:text-black mr-1 mb-1 hover:cursor-pointer hover:bg-white"
                                         onClick={(e) => {
                                             e.preventDefault()
                                             setSelectedTags([...selectedTags, tag.name])
                                             setCurrentTag("")
                                         }}
                                     >
-                                        {tag.name} <span className="bg-peri py-1 px-1 rounded-md">{tag.count}</span>
+                                        {tag.name} <span className="py-1 px-1 font-bold">{tag.count}</span>
                                     </button>
                                 )
                             })
                         }
-                    </div>
-                </>
-            }
+                    </div> :
+                    <p className="text-gray-400  text-sm mb-2 italic">
+                        No tag suggestions
+                    </p>
+                }
         </div>
     )
 

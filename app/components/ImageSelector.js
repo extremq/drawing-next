@@ -8,7 +8,7 @@ export default function ImageSelector({ images, setImages }) {
             </label>
             <label
                 htmlFor="image"
-                className="hover:cursor-pointer bg-white hover:bg-blue-100 text-black py-2 px-3 rounded font-bold"
+                className="hover:cursor-pointer bg-black hover:bg-white border hover:text-black text-white py-2 px-3 font-bold"
             >
                 +
             </label>
@@ -23,7 +23,7 @@ export default function ImageSelector({ images, setImages }) {
                                         key={image.name}
                                         src={URL.createObjectURL(image)}
                                         alt={image.name}
-                                        className="w-full aspect-square object-cover border-2 rounded-md hover:cursor-pointer hover:border-red-500"
+                                        className="w-full aspect-square object-cover border-2 hover:cursor-pointer hover:border-red-500"
                                         onClick={() => {
                                             // Remove image from array
                                             setImages(images.filter((img) => {

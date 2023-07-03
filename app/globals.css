@@ -9,3 +9,13 @@ body {
     color: #fff;
     font-family: "Inter", sans-serif;
 }
+
+::selection {
+    color: black;
+    background: #B9BBEC;
+}
+
+::-moz-selection {
+    color: black;
+    background: #B9BBEC;
+}

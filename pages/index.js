@@ -4,6 +4,8 @@ import PostEmbed from '@/app/components/PostEmbed'
 
 export default function Home() {
     const [posts, setPosts] = useState([])
+    const [loading, setLoading] = useState(true)
+
     // Have lastDateFrom and lastDateTo as variables
     // They must be timestamps
     let lastDateFrom = new Date(new Date().setMonth(new Date().getMonth() - 1)).getTime()
@@ -11,6 +13,8 @@ export default function Home() {
 
     // Fetch posts from last month
     useEffect(() => {
+        setLoading(true)
+
         fetch("/api/posts"
             + "?from=" + lastDateFrom
             + "&to=" + lastDateTo
@@ -20,6 +24,7 @@ export default function Home() {
                 if (data.ok) {
                     setPosts(data.posts)
                     console.log(data.posts)
+                    setLoading(false)
                 }
             })
     }, [])
@@ -52,6 +57,8 @@ export default function Home() {
                         // Only add posts that are not already in posts
                         lastDateFrom = new Date(new Date(lastDateFrom).setMonth(new Date(lastDateFrom).getMonth() - 1)).getTime()
                         lastDateTo = new Date(new Date(lastDateTo).setMonth(new Date(lastDateTo).getMonth() - 1)).getTime()
+                        setLoading(true)
+
                         fetch("/api/posts"
                             + "?from=" + lastDateFrom
                             + "&to=" + lastDateTo
@@ -62,11 +69,14 @@ export default function Home() {
                                     setPosts([...posts, ...data.posts.filter((post) => {
                                         return !posts.includes(post)
                                     })])
+                                    setLoading(false)
                                 }
                             })
                     }}
-                    className="bg-black hover:bg-white hover:text-black border border-white text-white px-3 py-2 text-sm font-medium">
-                    Load More
+                    className="bg-black hover:bg-white hover:text-black border disabled:cursor-not-allowed border-white text-white px-3 py-2 text-sm font-medium"
+                    disabled={loading}    
+                >
+                    {loading ? "Loading..." : "Load more"}
                 </button>
             </div>
         </Layout>

@@ -19,7 +19,7 @@ export default function RootLayout({ children, title }) {
                 <meta name="twitter:card" content="summary_large_image" />
                 <title>{title}</title>
             </Head>
-            <div className="container mx-auto max-w-4xl">
+            <div className="container mx-auto max-w-4xl px-2">
                 <Navbar />
                 <h1 className="text-4xl font-bold mb-3">
                     {title}

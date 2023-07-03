@@ -28,7 +28,9 @@ export default function Home() {
         <Layout title={"Latest Posts"}>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 {
-                    posts.map(post => (
+                    posts.sort((a, b) => {
+                        return new Date(b.timestamp) - new Date(a.timestamp)
+                    }).map(post => (
                         <div key={post._id} className="mb-4">
                             <PostEmbed
                                 title={post.title}
@@ -40,10 +42,10 @@ export default function Home() {
                     ))
                 }
             </div>
-            
+
             {/* Load more button */}
             <div className="flex justify-center mt-4">
-                <button 
+                <button
                     onClick={() => {
                         // Fetch posts from one month before lastDateFrom
                         // and one month before lastDateTo

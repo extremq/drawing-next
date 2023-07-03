@@ -65,7 +65,7 @@ export default function PostForm() {
                 setError(null)
 
                 // Redirect to post
-                Router.push(`/p/${data.id}`)
+                Router.push(`/post/${data.id}`)
             }
         }
         catch (error) {

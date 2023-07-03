@@ -63,6 +63,14 @@ async function newPostRoute (req, res) {
     return res.status(200).send({ ok: true, id: post._id });
 };
 
+export const config = {
+    api: {
+        bodyParser: {
+            sizeLimit: '4mb'
+        }
+    }
+}
+
 export default withIronSessionApiRoute(
     newPostRoute,
     sessionOptions,

@@ -1,6 +1,7 @@
 import 'app/globals.css'
 import Head from 'next/head'
 import Navbar from '@/app/components/Navbar'
+import Script from 'next/script'
 
 export default function RootLayout({ children, title }) {
     return (

@@ -22,6 +22,7 @@ export default function PostForm() {
     const handleSubmit = async (e) => {
         e.preventDefault()
 
+        console.log("Submitting...")
         // Check if submitting
         if (submitting) return
 

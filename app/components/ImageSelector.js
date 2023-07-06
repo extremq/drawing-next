@@ -1,4 +1,9 @@
-export default function ImageSelector({ images, setImages }) {
+import React from "react"
+
+// Parent forces rerender
+export default React.memo(ImageSelector)
+
+function ImageSelector({ images, setImages }) {
     return (
         <div>
             <label
@@ -18,6 +23,7 @@ export default function ImageSelector({ images, setImages }) {
                     <div className="grid grid-cols-3 gap-3">
                         {
                             images.map((image) => {
+                                console.log("map")
                                 return (
                                     <img
                                         key={image.name}
@@ -45,6 +51,7 @@ export default function ImageSelector({ images, setImages }) {
                 accept=".webp"
                 multiple
                 onChange={(e) => {
+                    console.log("change")
                     // Only add images that are not already in the array
                     const newImages = [...images]
                     for (let i = 0; i < e.target.files.length; i++) {

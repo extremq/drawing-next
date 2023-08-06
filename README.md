@@ -1,3 +1,6 @@
+# REMOVED
+No, don't worry, I didn't just give up. I had to choose between piano and drawing. At first, I chose drawing, but after exploring it I was drawn by the piano way more.
+
 # Drawing
 Well, this is a Next.js app you can find at [desenez.eu](https://desenez.eu). I use it to post my drawings.
 
